@@ -1,0 +1,6 @@
+{
+    "EJ001": {"msg": "Incorrect JSON syntax"},
+    "EL001": {"msg": "Incorrect e-mail or password"},
+    "EA001": {"msg": "Unauthorized"},
+    "EA002": {"msg": "Incorrect JWT syntax"}
+}
