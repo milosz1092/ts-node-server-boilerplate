@@ -1,4 +1,5 @@
 import * as path from 'path';
+import * as fs from 'fs';
 import * as express from 'express';
 import * as provideGzipped from 'express-static-gzip';
 import { parseBodySet } from './middleware/body';
@@ -7,7 +8,10 @@ import { addResponseHeaders } from './middleware/header';
 import { handleSyntaxError, handleOtherError } from './middleware/error';
 import Router from './router/Router';
 
-export const clientPath = path.join(__dirname, '../../ts-pwa-boilerplate/dist');
+const clientPath = path.join(__dirname, '../../ts-pwa-boilerplate/dist');
+const isClientIndexGzipped = fs.existsSync(`${clientPath}/index.html.gz`);
+
+const clientIndexFilename = isClientIndexGzipped ? 'index.html.gz' : 'index.html';
 
 export default class App {
     static getInstance(): express.Application {
@@ -26,9 +30,11 @@ export default class App {
         Router.injectTo(app);
 
         app.all('*', (req, res) => {
-            res.header("content-encoding",'gzip');
-            res.header("Content-Type",'text/html');
-            res.sendfile(clientPath + '/index.html.gz');
+            if (isClientIndexGzipped) {
+                res.header("content-encoding", 'gzip');
+            }
+            res.header("Content-Type", 'text/html');
+            res.sendFile(`${clientPath}/${clientIndexFilename}`);
         });
 
         app.listen(8080, () => {
