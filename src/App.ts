@@ -20,7 +20,7 @@ export default class App {
         app.use(
             redirectUnsecureConnection,
             ...parseBodySet,
-            // addResponseHeaders,
+            addResponseHeaders,
             handleSyntaxError,
             handleOtherError
         );

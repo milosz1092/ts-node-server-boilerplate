@@ -1,9 +1,9 @@
 import * as fs from 'fs';
-import { createServer } from 'spdy';
+import { createServer, Server as HTTP2Server } from 'spdy';
 import App from './App';
 
 export default class Server {
-    static instance: any = null;
+    static instance: HTTP2Server = null;
 
     static init() {
         const privateKey  = fs.readFileSync('97481052_localhost.key', 'utf8');
