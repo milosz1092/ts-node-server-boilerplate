@@ -5,7 +5,7 @@ import testRouting from './route/test.route';
 export default class Router {
     static injectTo(app: express.Application) {
         app.use((req, res, next) => {
-            res.header("Content-Type", 'application/json');
+            res.header("content-type", 'application/json');
             next();
         });
 

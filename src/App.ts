@@ -33,7 +33,7 @@ export default class App {
             if (isClientIndexGzipped) {
                 res.header("content-encoding", 'gzip');
             }
-            res.header("Content-Type", 'text/html');
+            res.header("content-type", 'text/html');
             res.sendFile(`${clientPath}/${clientIndexFilename}`);
         });
 
